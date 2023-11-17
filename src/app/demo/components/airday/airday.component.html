@@ -1,0 +1,72 @@
+<div class="col-12" *ngIf="loading">
+    <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+</div>
+<div class="col-12" (window:scroll)="onScroll()">
+    <div class="grid ml-2">
+        <div class="col-6 lg:col-3" *ngFor="let item of airing">
+            <a class="cursor-pointer" (click)="open_detail(item)">
+                <div class="card">
+                    <img src="https://image.tmdb.org/t/p/original{{item.poster_path}}" [preview]="true" alt="Image"
+                        width="100%">
+                    <p style="font-family: sans-serif">{{item.original_name}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="airing_dialog" [style]="{ width: '95vw' , height: '130vw'}" header="{{judul}}" [modal]="true"
+    [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content">
+        <div class="poster">
+            <img src="https://image.tmdb.org/t/p/original{{selected.backdrop_path}}" [preview]="true" alt="Image"
+                width="100%" height="auto" class="shadow-4">
+            <div class="field" *ngIf="!selected.backdrop_path">
+                <p style="font-size: 1.2em; font-weight: bold;">Tidak ada Gambar</p>
+            </div>
+            <div class="gallery-module__slide">
+                <div *ngFor="let data of seasons">
+                    <img src="https://image.tmdb.org/t/p/original{{data.poster_path}}" [preview]="true"
+                        [alt]="data.name" width="100" class="shadow-4 ml-4" *ngIf="data.poster_path">
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple class="p-button-text" label="Close" (click)="close_detail()"></button>
+    </ng-template>
+</p-dialog>
+
+<!-- <div class="gallery-module__slide shadow-4">
+                <div *ngFor="let data of seasons">
+                    <img src="https://image.tmdb.org/t/p/original{{data.poster_path}}" [preview]="true"
+                        [alt]="data.name" width="100" class="shadow-4 ml-4">
+                </div>
+            </div> -->
+
+<!-- <p-chip class="ml-2" *ngFor="let genre of genres">
+    <div class="p-2">{{genre}}</div>
+</p-chip> -->
+
+<!-- <div class="col-12">
+    <div class="field">
+        <h2 style="font-family: sans-serif; font-weight: bold; font-size: 2rem;">Airing Today</h2>
+    </div>
+    <div class="grid ml-2">
+        <div class="col-6 lg:col-3" *ngFor="let item of airing">
+            <a class="cursor-pointer" (click)="get_detail()">
+                <div class="card">
+                    <p style="font-family: sans-serif">{{item.original_name}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div> -->
+
+<!-- <p-toolbar styleClass="mb-4 gap-2" *ngIf="airing_dialog">
+    <ng-template pTemplate="right">
+        <p-chip class="ml-2" *ngFor="let genre of genres">
+            <div class="p-2">{{genre}}</div>
+        </p-chip>
+    </ng-template>
+</p-toolbar> -->

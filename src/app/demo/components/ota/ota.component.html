@@ -1,0 +1,39 @@
+<div class="col-12" *ngIf="loading">
+    <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+</div>
+<div class="col-12" (window:scroll)="onScroll()">
+    <div class="grid ml-2">
+        <div class="col-6 lg:col-3" *ngFor="let item of ota">
+            <a class="cursor-pointer" (click)="open_detail(item)">
+                <div class="card">
+                    <img src="https://image.tmdb.org/t/p/original{{item.poster_path}}" [preview]="true" alt="Image"
+                        width="100%">
+                    <p style="font-family: sans-serif">{{item.original_name}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<p-dialog [(visible)]="ota_dialog" [style]="{ width: '75vw'}" header="{{judul}}" [modal]="true" [draggable]="false"
+    [resizable]="false">
+    <ng-template pTemplate="content">
+        <div class="poster">
+            <img src="https://image.tmdb.org/t/p/original{{this.selected.backdrop_path}}" [preview]="true" alt="Image"
+                width="100%" height="auto" class="shadow-4">
+            <div class="field" *ngIf="!selected.backdrop_path">
+                <p style="font-size: 1.2em; font-weight: bold;">Tidak ada Gambar</p>
+            </div>
+            <div class="gallery-module__slide">
+                <div *ngFor="let data of seasons">
+                    <img src="https://image.tmdb.org/t/p/original{{data.poster_path}}" [preview]="true"
+                        [alt]="data.name" width="100" class="shadow-4 ml-4" *ngIf="data.poster_path">
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple class="p-button-text" label="Close" (click)="close_detail()"></button>
+    </ng-template>
+</p-dialog>

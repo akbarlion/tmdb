@@ -1,0 +1,44 @@
+<div class="col-12" *ngIf="loading">
+    <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+</div>
+<div class="col-12" (window:scroll)="onScroll()">
+    <div class="grid ml-2">
+        <div class="col-6 lg:col-3" *ngFor="let item of popular">
+            <a class="cursor-pointer" (click)="open_detail(item)">
+                <div class="card">
+                    <img src="https://image.tmdb.org/t/p/original{{item.poster_path}}" [preview]="true" alt="Image"
+                        width="100%">
+                    <p style="font-family: sans-serif">{{item.original_name}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="popular_dialog" [style]="{ width: '95vw' , height: '130vw'}" [modal]="true" [draggable]="false"
+    [resizable]="false">
+    <ng-template pTemplate="content">
+        <div class="grid">
+            <div class="col-6">
+                <p class="font-special">{{judul}}</p>
+                <img src="https://image.tmdb.org/t/p/original{{selected.backdrop_path}}" [preview]="true" alt="Image"
+                    width="100%" height="auto" class="shadow-4">
+                <div class="field" *ngIf="!selected.backdrop_path">
+                    <p style="font-size: 1.2em; font-weight: bold;">Tidak ada Gambar</p>
+                </div>
+            </div>
+            <div class="col-6 mt-6">
+                <div class="field">
+                    <p style="font-size: 1.2em;">{{desc}}</p>
+                </div>
+                <div class="field" *ngIf="!desc">
+                    <p style="font-size: 1.2em; font-weight: bold;">Tidak ada deskripsi</p>
+                </div>
+
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple class="p-button-text" label="Close" (click)="close_detail()"></button>
+    </ng-template>
+</p-dialog>

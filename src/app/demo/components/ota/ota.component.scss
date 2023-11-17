@@ -1,0 +1,13 @@
+.gallery-module__slide {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.poster {
+    position: relative;
+    width: 100%;
+    height: auto;
+}

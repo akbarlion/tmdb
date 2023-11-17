@@ -1,0 +1,17 @@
+<div class="col-12" (window:scroll)="onScroll()">
+    <div class="grid ml-2">
+        <div class="col-6 lg:col-3" *ngFor="let item of now_playing">
+            <a class="cursor-pointer" (click)="open_dialog(item)">
+                <div class="card">
+                    <img src="https://image.tmdb.org/t/p/original{{item.poster_path}}" [preview]="true" alt="Image"
+                        width="100%">
+                    <p style="font-family: sans-serif">{{item.original_name}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="nowplaying_dialog" [style]="{width: '75vw'}" header="{{judul}}">
+
+</p-dialog>
